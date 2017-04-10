@@ -480,7 +480,13 @@ class Parser(object):
 
                     for sectionname in pairs.iterkeys():
 
-                        value = elems[fields[pairs[sectionname]]]
+                        try:
+                            value = elems[fields[pairs[sectionname]]]
+                        except IndexError, e:
+                            if sectionname == 'idle':
+                                value = elems[-1]
+                            else:
+                                raise
 
                         if sectionname == 'membuffer' or \
                                 sectionname == 'memcache' or \
