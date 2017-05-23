@@ -61,19 +61,21 @@ class Multiparser(object):
                 chunk = self.__get_chunk(start, end)
 
                 parser = sarparse.Parser()
-                cpu_usage, mem_usage, swp_usage, io_usage = \
+                cpu_usage, mem_usage, swp_usage, io_usage, net_usage = \
                     parser._parse_file(parser._split_file(chunk))
 
                 self.__sarinfos[self.__get_part_date(chunk)] = {
                     "cpu": cpu_usage,
                     "mem": mem_usage,
                     "swap": swp_usage,
-                    "io": io_usage
+                    "io": io_usage,
+                    "net": net_usage
                 }
                 del(cpu_usage)
                 del(mem_usage)
                 del(swp_usage)
                 del(io_usage)
+                del(net_usage)
                 del(parser)
 
             return(True)

@@ -13,6 +13,9 @@ PART_SWP = 2
 """I/O usage part of SAR file"""
 PART_IO = 3
 
+"""NET usage part of SAR file"""
+PART_NET = 4
+
 """CPU regexp pattern for detecting SAR section header"""
 PATTERN_CPU = ".*CPU.*(usr|user).*nice.*sys.*"
 
@@ -59,6 +62,9 @@ FIELD_PAIRS_SWP = {
 """I/O usage regexp pattern for detecting SAR section header"""
 PATTERN_IO = ".*tps.*rtps.*wtps.*bread\/s.*bwrtn\/s.*"
 
+"""NET usage regexp pattern for detecting SAR section header"""
+PATTERN_NET = ".*IFACE.*rxpck\/s.*txpck\/s.*rxkB\/s.*txkB\/s.*rxcmp\/s.*txcmp\/s.*rxmcst\/s.*ifutil"
+
 """Regexp terms for finding fields in SAR parts for swap usage"""
 FIELDS_IO = [
     '^tps', '^rtps', '^wtps', 'bread\/s', 'bwrtn\/s'
@@ -68,6 +74,26 @@ FIELDS_IO = [
 FIELD_PAIRS_IO = {
     'tps': FIELDS_IO[0], 'rtps': FIELDS_IO[1], 'wtps': FIELDS_IO[2],
     'bread': FIELDS_IO[3], 'bwrite': FIELDS_IO[4],
+
+}
+
+"""Regexp terms for finding fields in SAR parts for net usage"""
+FIELDS_NET = [
+    #'^tps', '^rtps', '^wtps', 'bread\/s', 'bwrtn\/s'
+    '^IFACE','^rxpck\/s','^txpck\/s','^rxkB\/s','^txkB\/s','^rxcmp\/s','^txcmp\/s','^rxmcst\/s','^%ifutil'
+]
+
+"""Pair regexp terms with field names in net usage output dictionary"""
+FIELD_PAIRS_NET = {
+    'IFACE':FIELDS_NET[0],
+    'rxpck':FIELDS_NET[1],
+    'txpck':FIELDS_NET[2],
+    'rxkB':FIELDS_NET[3],
+    'txkB':FIELDS_NET[4],
+    'rxcmp':FIELDS_NET[5],
+    'txcmp':FIELDS_NET[6],
+    'rxmcst':FIELDS_NET[7],
+    'ifutil':FIELDS_NET[8],
 
 }
 
@@ -82,6 +108,6 @@ PATTERN_DATE = "[0-9][0-9][0-9][0-9]\-[0-9][0-9]\-[0-9][0-9]"
 
 __all__ = [
     "PART_CPU", "PART_MEM", "PART_SWP", "PART_IO",
-    "PATTERN_CPU", "PATTERN_MEM", "PATTERN_SWP", "PATTERN_IO",
+    "PATTERN_CPU", "PATTERN_MEM", "PATTERN_SWP", "PATTERN_IO","PATTERN_NET",
     "PATTERN_RESTART", "PATTERN_MULTISPLIT", "PATTERN_DATE"
 ]
